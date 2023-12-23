@@ -27,4 +27,12 @@ export const useQueryStore = create<QueryStore>()(
 	)
 );
 
+interface SidebarStateStore {
+	isSidebarActive: boolean;
+	setIsSidebarActive: (bol?: boolean) => void;
+}
 
+export const useSidebarStateStore = create<SidebarStateStore>((set) => ({
+	isSidebarActive: false,
+	setIsSidebarActive: (bol) => set(() => ({ isSidebarActive: bol })),
+}));

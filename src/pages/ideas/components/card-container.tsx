@@ -8,6 +8,7 @@ import {
 	MdOutlineKeyboardArrowRight,
 } from 'react-icons/md';
 import PaginateNumber from './paginate-number';
+import { useMediaQuery } from '@uidotdev/usehooks';
 const CardContainer = ({
 	data,
 	meta,
@@ -15,7 +16,9 @@ const CardContainer = ({
 	data: ApiIdeasType[];
 	meta: MetaResponseType;
 }) => {
+	const isSmallDevice = useMediaQuery('only screen and (max-width : 768px)');
 	const queryStore = useQueryStore();
+	
 	return (
 		<div className="mt-7 flex flex-col gap-y-12">
 			<div className="grid xl:grid-cols-4 sm:grid-cols-2 lg:grid-cols-3 mx-auto grid-cols-1  gap-x-5 gap-y-10">
@@ -35,7 +38,7 @@ const CardContainer = ({
 							);
 						})}
 			</div>
-			<nav className="flex items-center mx-auto gap-x-5">
+			<nav className="flex items-center mx-auto sm:gap-x-5 gap-x-0">
 				<button
 					className={`${queryStore.currentPage === 1 && 'text-gray-400'}`}
 					disabled={queryStore.currentPage === 1}
@@ -54,7 +57,7 @@ const CardContainer = ({
 					min={1}
 					max={meta.last_page}
 					current={meta.current_page}
-					maxLength={5}
+					maxLength={isSmallDevice ? 3 : 5}
 				/>
 				<button
 					onClick={() => queryStore.setCurrentPage(queryStore.currentPage + 1)}

@@ -10,9 +10,11 @@ import { SortType } from '../../../enums';
 import { useQuery } from 'react-query';
 import { fetchAllPost } from '../../../http/_GET';
 import CardSkeleton from '../../../components/loading/card-skeleton';
+import { useNavigate } from 'react-router-dom';
 
 const ContentPost = () => {
 	const queryStore = useQueryStore();
+	const navigate = useNavigate();
 	const handleShowperPageChange = (e: ChangeEvent<HTMLSelectElement>) => {
 		queryStore.setPageSize(Number(e.currentTarget.value));
 	};
@@ -34,6 +36,12 @@ const ContentPost = () => {
 					sort: queryStore.sort,
 					url: SUITMEDIA_URL_SERVER,
 				}),
+			refetchOnWindowFocus: false,
+			onError: () => {
+				window.sessionStorage.removeItem('query-store');
+				alert('Network Error, Redirecting to Homepage');
+				navigate('/');
+			},
 		}
 	);
 	return (

@@ -1,19 +1,15 @@
 import { Link, useLocation } from 'react-router-dom';
 import useScroll from '../hooks/useScroll';
 import { ScrollDirection } from '../enums';
+import { Spin as Hamburger } from 'hamburger-react';
+import { ROUTES_NAV } from '../contants';
+import { useSidebarStateStore } from '../store';
+
 const Header = () => {
-	const routes: string[] = [
-		'work',
-		'about',
-		'services',
-		'ideas',
-		'careers',
-		'contact',
-	];
 	const location = useLocation();
 	const locationRef = location.pathname.replace('/', '');
 	const { isHeaderAtTop, scrollDirection } = useScroll();
-
+	const sidebarState = useSidebarStateStore();
 	return (
 		<header
 			className={`flex ${
@@ -32,8 +28,8 @@ const Header = () => {
 						alt="logo"
 					/>
 				</Link>
-				<ul className="flex gap-x-3 text-white">
-					{routes.map((el) => {
+				<ul className="hidden sm:flex gap-x-3 text-white">
+					{ROUTES_NAV.map((el) => {
 						return (
 							<li
 								key={el}
@@ -54,6 +50,13 @@ const Header = () => {
 						);
 					})}
 				</ul>
+				<span className="sm:hidden">
+					<Hamburger
+						toggled={sidebarState.isSidebarActive}
+						onToggle={sidebarState.setIsSidebarActive}
+						color="white"
+					/>
+				</span>
 			</div>
 		</header>
 	);
