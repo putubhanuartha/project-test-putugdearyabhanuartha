@@ -1,6 +1,13 @@
-import { Link } from 'react-router-dom';
+import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 function App() {
+	const navigate = useNavigate();
+	useEffect(() => {
+		setTimeout(() => {
+			navigate('/ideas');
+		}, 700);
+	}, [navigate]);
 	return (
 		<div className="pt-20 min-h-[50vh] flex">
 			<div className="m-auto flex flex-col gap-y-2">
@@ -8,12 +15,7 @@ function App() {
 					Welcome to Homepage
 				</h2>
 				<p className="text-center text-xl">This is dummy page only</p>
-				<Link
-					className="text-center bg-orange-500 text-white hover:bg-orange-600 px-2 py-1 w-fit rounded-lg mx-auto block"
-					to={'/ideas'}
-				>
-					Go to ideas page
-				</Link>
+				<p className="text-center animate-bounce text-lg">Redirecting ...</p>
 			</div>
 		</div>
 	);
