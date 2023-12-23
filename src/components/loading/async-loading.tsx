@@ -1,8 +1,9 @@
-
 const AsyncLoading = () => {
 	return (
-		<div className="h-full flex">
-			<p className="m-auto text-3xl font-semibold mt-5">Loading ...</p>
+		<div className="min-h-[50vh] flex pt-20">
+			<p className="m-auto text-xl font-semibold w-fit">
+				Loading Resources ...
+			</p>
 		</div>
 	);
 };
