@@ -17,9 +17,11 @@ const ContentPost = () => {
 	const navigate = useNavigate();
 	const handleShowperPageChange = (e: ChangeEvent<HTMLSelectElement>) => {
 		queryStore.setPageSize(Number(e.currentTarget.value));
+		queryStore.setCurrentPage(1);
 	};
 	const handleSortChange = (e: ChangeEvent<HTMLSelectElement>) => {
 		queryStore.setSortType(e.currentTarget.value as SortType);
+		queryStore.setCurrentPage(1);
 	};
 	const { data, isError, isLoading } = useQuery(
 		[

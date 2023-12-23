@@ -30,6 +30,7 @@ const Sidebar = () => {
 							className="overflow-hidden flex flex-col items-center w-fit"
 						>
 							<Link
+								onClick={() => sidebarState.setIsSidebarActive(false)}
 								to={el}
 								className="capitalize text-center font-semibold text-lg"
 							>
